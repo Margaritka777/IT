@@ -1,0 +1,745 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Gunjan Kaushik">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&amp;display=swap" media="all" onload="this.media='all'">
+    <link rel="stylesheet" href="https://www.toolsqa.com/static/css/article.css">
+    <title>Що таке архітектура клієнт-сервера та протокол HTTP?</title>
+  </head>
+  <body>
+    <main role="main" class="article-content">
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Для будь-якої веб-програми служби API працюють як будівельний блок. Тому для вас, як тестувальника, стає дуже важливо переконатися, що веб-сервіси не мають помилок і сприяють безпечному обміну інформацією. У цій серії статей ми розглянемо автоматизацію Rest API за допомогою RestAssured. Але перш ніж перейти до цього, давайте розглянемо деякі основи, щоб зміцнити наші знання про API. Однією з основних концепцій, з якої варто почати, є розуміння архітектури клієнт-сервер. У цій статті ми розберемо наступні пункти-</font>
+        </font>
+      </p>
+      <ul>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Архітектура клієнт-сервера</font>
+            </font>
+          </em>
+          <ul>
+            <li>
+              <em>
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">Що таке клієнт?</font>
+                </font>
+              </em>
+            </li>
+            <li>
+              <em>
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">Що таке сервер?</font>
+                </font>
+              </em>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Як працює клієнт-серверна архітектура?</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Які є різні типи архітектур клієнт-сервер?</font>
+            </font>
+          </em>
+          <ul>
+            <li>
+              <em>
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">1-ярусна архітектура</font>
+                </font>
+              </em>
+            </li>
+            <li>
+              <em>
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">2-ярусна архітектура</font>
+                </font>
+              </em>
+            </li>
+            <li>
+              <em>
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">3-ярусна архітектура</font>
+                </font>
+              </em>
+            </li>
+            <li>
+              <em>
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">N-рівнева архітектура</font>
+                </font>
+              </em>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Переваги використання архітектури клієнт-сервер?</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Які недоліки клієнт-серверної архітектури?</font>
+            </font>
+          </em>
+        </li>
+      </ul>
+      <h2>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Що таке клієнт-серверна архітектура?</font>
+        </font>
+      </h2>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Архітектуру клієнт-сервера в простому сенсі можна назвати моделлю споживач-виробник, де клієнт діє як споживач, тобто запитувач послуг, а сервер є виробником, </font>
+        </font>
+        <em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">тобто</font>
+          </font>
+        </em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> постачальником послуг. Давайте подивимося, як вони описані в обчислювальному сенсі.</font>
+        </font>
+      </p>
+      <h3>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Що таке клієнт?</font>
+            </font>
+          </strong>
+        </em>
+      </h3>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Клієнт в обчислювальній техніці — це система або програма, яка підключається до віддаленої системи або програмного забезпечення для отримання інформації. Клієнт робить запит на сервер і отримує відповідь з інформацією. Клієнти можуть бути трьох типів - товстий, тонкий або гібридний клієнт.</font>
+        </font>
+      </p>
+      <ul>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Товстий або товстий клієнт виконує операцію сам, не потребуючи сервера. Персональний комп’ютер є чудовим прикладом товстого клієнта, оскільки більшість його операцій не залежать від зовнішнього сервера.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Тонкий клієнт використовує ресурси головного комп’ютера, де тонкий клієнт представляє дані, оброблені сервером додатків. Веб-браузер є прикладом тонкого клієнта.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Гібридний клієнт – це комбінація товстого та тонкого клієнта. Так само, як і товстий клієнт, він обробляє дані всередині, але покладається на сервер додатків для збереження даних. Прикладом гібридного клієнта може бути будь-яка онлайн-ігра, запущена в системі.</font>
+            </font>
+          </em>
+        </li>
+      </ul>
+      <h3>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Що таке сервер?</font>
+            </font>
+          </strong>
+        </em>
+      </h3>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Сервер — це система або комп’ютерна програма, яка діє як постачальник даних. Він може надавати дані через LAN ( </font>
+        </font>
+        <em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">локальна мережа</font>
+          </font>
+        </em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> ) або WAN ( </font>
+        </font>
+        <em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">глобальна мережа</font>
+          </font>
+        </em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> ), використовуючи Інтернет. Функціональні можливості, які надає сервер, називаються послугами. Ці послуги надаються у відповідь на запити клієнтів. Деякі з поширених серверів:</font>
+        </font>
+      </p>
+      <ul>
+        <li>
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Сервер бази даних</font>
+              </font>
+            </strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> - використовується для підтримки та спільного використання бази даних у мережі.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Сервер додатків</font>
+              </font>
+            </strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> — використовується для розміщення додатків у веб-браузері, що дозволяє використовувати їх без інсталяції локально.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Поштовий сервер</font>
+              </font>
+            </strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> - використовується для спілкування електронною поштою.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Веб-сервер</font>
+              </font>
+            </strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> - використовується для розміщення веб-сторінок, завдяки чому можлива всесвітня мережа.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Ігровий сервер</font>
+              </font>
+            </strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> - використовується для гри в багатокористувацькі ігри.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Файловий сервер</font>
+              </font>
+            </strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> - використовується для обміну файлами та папками через мережу.</font>
+            </font>
+          </em>
+        </li>
+      </ul>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Ці клієнти та сервери не обов’язково знаходяться в одному місці. Вони можуть розташовуватися в різних місцях або розташовуватися як різні процеси на одному комп’ютері. Вони підключаються через Інтернет і взаємодіють через </font>
+        </font>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">протокол HTTP</font>
+            </font>
+          </strong>
+        </em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> , який буде обговорюватися далі в цій статті. Може бути кілька клієнтів, які запитують сервер, або клієнт може надсилати запити з кількох серверів.</font>
+        </font>
+      </p>
+      <h3>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Візуалізація архітектури клієнт-сервер</font>
+            </font>
+          </strong>
+        </em>
+      </h3>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Наведена нижче діаграма візуалізує типову модель клієнт-сервер.</font>
+        </font>
+      </p>
+      <p>
+        <img src="https://www.toolsqa.com/gallery/Client%20Server/Server.png" alt="Server.png" width="636" height="243">
+      </p>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Як показано на діаграмі, один сервер може обслуговувати запити кількох клієнтів. Так само клієнт може запитувати дані з різних серверів. Для прикладу розглянемо </font>
+        </font>
+        <em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Google</font>
+          </font>
+        </em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> . Тут Google діє як сервер, а користувачі, що сидять у різних місцях, виступають як клієнти.</font>
+        </font>
+      </p>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Іншим прикладом, з яким ми стикаємось у повсякденному житті, є портал онлайн-банкінгу, у якому браузер, який ми використовуємо для відкриття порталу, діє як клієнт, а база даних і банківське програмне забезпечення виступають як сервер. Це поширює спільний доступ до ресурсів між декількома користувачами, що призводить до економічності та економії часу.</font>
+        </font>
+      </p>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">У наступному розділі ми побачимо, як працює модель клієнт-сервер і як відбувається ця взаємодія.</font>
+        </font>
+      </p>
+      <h2>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Як працює клієнт-серверна архітектура?</font>
+        </font>
+      </h2>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Як уже обговорювалося вище, модель клієнт-сервер діє як відносини споживач-сервер. Але як це працює? Давайте подивимося на потік інформації в архітектурі клієнт-сервер через серію кроків, як описано нижче:</font>
+        </font>
+      </p>
+      <ol>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Протокол зв'язку HTTP допомагає встановити з'єднання між клієнтом і сервером.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Клієнт надсилає запит у формі XML або JSON через активне з’єднання. І клієнт, і сервер розуміють формат повідомлення.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Отримавши запит клієнта, сервер шукає запитані дані та надсилає відповідні деталі як відповідь у тому самому форматі, у якому було отримано запит.</font>
+            </font>
+          </em>
+        </li>
+      </ol>
+      <p>
+        <img src="https://www.toolsqa.com/gallery/Client%20Server/HTTP-Request.png" alt="HTTP-Request.png width="636" height="155">
+      </p>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Наведена вище схема показує процес зв'язку між клієнтом і сервером. Клієнт надсилає </font>
+        </font>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">HTTP-запит</font>
+            </font>
+          </strong>
+        </em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> , на який сервер надсилає </font>
+        </font>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">HTTP-відповідь</font>
+            </font>
+          </strong>
+        </em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> . Розглянемо приклад, щоб краще зрозуміти це.</font>
+        </font>
+      </p>
+      <h3>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Візуалізація потоку архітектури клієнт-сервер</font>
+            </font>
+          </strong>
+        </em>
+      </h3>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Припустімо, що вам потрібно піти за покупками з дому до магазину через дорогу. Ви можете подорожувати на велосипеді і, доїхавши, замовити у продавця потрібні вам товари. Тепер, якщо продавець знайде товар, він привезе його вам, інакше повідомить про його відсутність.</font>
+        </font>
+      </p>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Тепер ви можете пов’язати наведений вище приклад із навігацією до веб-сайту, вулиця між вашим будинком і магазином є підключенням до Інтернету. Вид транспорту, який ви вибрали для переміщення, — це </font>
+        </font>
+        <a href="http://www.tcpipguide.com/">
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">TCP/IP</font>
+              </font>
+            </strong>
+          </em>
+        </a>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> , який визначає протокол зв’язку для передачі даних через Інтернет. Адреса магазину – це DNS ( </font>
+        </font>
+        <em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">сервер доменних імен</font>
+          </font>
+        </em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> ) веб-сайту. Мовою вашого спілкування з продавцем є HTTP ( </font>
+        </font>
+        <em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">протокол передачі гіпертексту</font>
+          </font>
+        </em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> ), який визначає мову взаємодії між клієнтом і сервером. Ваш запит на замовлення – це </font>
+        </font>
+        <a href="https://www.toolsqa.com/client-server/http-request/">
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">HTTP-запит</font>
+              </font>
+            </strong>
+          </em>
+        </a>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> , а оновлення про наявність товару – це </font>
+        </font>
+        <a href="https://www.toolsqa.com/client-server/http-response/">
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">HTTP-відповідь</font>
+              </font>
+            </strong>
+          </em>
+        </a>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> .</font>
+        </font>
+      </p>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Коли веб-браузер надсилає запит на сервер із DNS веб-сайту, а сервер схвалює запит клієнта, він надсилає повідомлення про успішне виконання 200 OK. Це повідомлення означає, що сервер знайшов веб-сайт і надсилає файли веб-сайту невеликими фрагментами даних у веб-переглядач. Потім браузер збирає та компонує ці невеликі фрагменти, щоб сформувати повний веб-сайт і показує його нам.</font>
+        </font>
+      </p>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Ми обговоримо докладніше HTTP-запит і відповідь у наступних статтях.</font>
+        </font>
+      </p>
+      <h2>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Які є різні типи архітектур клієнт-сервер?</font>
+        </font>
+      </h2>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Клієнт-серверна архітектура має наступні чотири типи:</font>
+        </font>
+      </p>
+      <ol>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">1-рівнева архітектура</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">2-рівнева архітектура</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">3-рівнева архітектура</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">N-рівнева архітектура</font>
+            </font>
+          </em>
+        </li>
+      </ol>
+      <h3>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">1-рівнева архітектура</font>
+            </font>
+          </strong>
+        </em>
+      </h3>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">У однорівневій архітектурі бізнес-логіка, логіка даних і інтерфейс користувача знаходяться на одній машині. Середовище просте і дешеве, оскільки клієнт і сервер знаходяться в одній системі, але розбіжність даних призводить до повторення роботи. Такі системи зберігають дані в локальному файлі або загальному драйвері. Прикладами однорівневих програм є MP3-плеєр або файли MS Office.</font>
+        </font>
+      </p>
+      <h3>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">2-рівнева архітектура</font>
+            </font>
+          </strong>
+        </em>
+      </h3>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">2-рівнева архітектура забезпечує найкраще середовище з точки зору продуктивності через відсутність будь-якого проміжного сервера. Інтерфейс користувача знаходиться на стороні клієнта, а база даних – на стороні сервера. База даних і бізнес-логіка можуть зберігатися як на стороні клієнта, так і на сервері, але вони повинні залишатися незмінними. Якщо обидва знаходяться на стороні клієнта, тоді така архітектура називається </font>
+        </font>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">архітектурою тонкого сервера «жирного клієнта»</font>
+            </font>
+          </strong>
+        </em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> . Навпаки, якщо обидва знаходяться на сервері, архітектура називається </font>
+        </font>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">архітектурою тонкого клієнта з повним сервером</font>
+            </font>
+          </strong>
+        </em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> . Система онлайн-бронювання квитків зазвичай використовує 2-рівневу архітектуру.</font>
+        </font>
+      </p>
+      <h3>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">3-рівнева архітектура</font>
+            </font>
+          </strong>
+        </em>
+      </h3>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">3-рівнева архітектура включає проміжне програмне забезпечення, яке використовується для взаємодії між клієнтом і сервером. Він хоч і дорогий, але дуже простий у використанні. Проміжне ПЗ покращує продуктивність і гнучкість. Він зберігає логіку бізнесу та даних. Три рівні 3-рівневої архітектури:</font>
+        </font>
+      </p>
+      <ul>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Рівень презентації (рівень клієнта)</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Прикладний рівень (бізнес-рівень)</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Рівень бази даних (рівень даних)</font>
+            </font>
+          </em>
+        </li>
+      </ul>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Майже всі веб-додатки є прикладами 3-рівневої архітектури.</font>
+        </font>
+      </p>
+      <h3>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">N-рівнева архітектура</font>
+            </font>
+          </strong>
+        </em>
+      </h3>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">N-рівнева архітектура є масштабованою формою 3-рівневої архітектури. У такому середовищі функції обробки, керування даними та представлення ізольовані на різних рівнях. Ізоляція робить систему легкою в управлінні та обслуговуванні. Це також називається багаторівневою архітектурою.</font>
+        </font>
+      </p>
+      <h2>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Які переваги використання клієнт-серверної архітектури?</font>
+        </font>
+      </h2>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Архітектура клієнт-сервер має такі переваги:</font>
+        </font>
+      </p>
+      <ul>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Він зберігає дані в одному центральному місці.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Він забезпечує резервне копіювання та відновлення даних.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Доступ до даних з єдиного сервера сприяє економічній ефективності з меншим обслуговуванням.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Ємність клієнта та сервера можна змінювати окремо.</font>
+            </font>
+          </em>
+        </li>
+      </ul>
+      <h2>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Проблеми архітектури клієнт-сервер?</font>
+        </font>
+      </h2>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Клієнт-серверна архітектура має такі недоліки:</font>
+        </font>
+      </p>
+      <ul>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Вірус може легко атакувати клієнта на сервері.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">У разі збою мережі може постраждати вся архітектура програми.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Під час передачі даних можлива атака "людина посередині" або підробка даних.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Через вразливість до різних видів атак, він вимагає спеціальної та безпечної мережевої операційної системи.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Можливість повної втрати пакетів даних або їх модифікації через втручання під час передачі.</font>
+            </font>
+          </em>
+        </li>
+      </ul>
+      <h2>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Ключові висновки</font>
+        </font>
+      </h2>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Отже, які висновки з цієї статті?</font>
+        </font>
+      </p>
+      <ul>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Модель клієнт-сервер схожа на відносини між продавцем і клієнтом.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Зв'язок між клієнтом і сервером здійснюється через протокол HTTP.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Архітектура клієнт-сервер поділяється на 1-рівневу, 2-рівневу, 3-рівневу та n-рівневу.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Ми обговорили різні переваги моделі клієнт-сервер, включаючи її централізовану структуру.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Потім ми побачили проблеми з архітектурою щодо того, наскільки клієнт-серверна модель вразлива до різних атак.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">У наступних статтях ми докладніше обговоримо модель клієнт-сервер, а потім перейдемо до REST API.</font>
+            </font>
+          </em>
+        </li>
+      </ul>
+    </main>
+  </body>
+</html>
