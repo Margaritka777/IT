@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Gunjan Kaushik">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&amp;display=swap" media="all" onload="this.media='all'">
+    <link rel="stylesheet" href="./article.css">
+    <title>Що таке HTTP запит?</title>
+  </head>
+  <body>
+    <main role="main" class="article-content">
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">У попередній статті ми вже бачили, що таке </font>
+        </font>
+        <a href="https://www.toolsqa.com/client-server/client-server-architecture-and-http-protocol/">
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">клієнт-серверна архітектура</font>
+              </font>
+            </strong>
+          </em>
+        </a>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> і як вона працює за допомогою протоколу зв’язку HTTP. Крім того, ми знаємо, що </font>
+        </font>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">HTTP</font>
+            </font>
+          </strong>
+        </em>
+        <em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> (HyperText Transfer Protocol)</font>
+          </font>
+        </em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> — це протокол зв’язку </font>
+        </font>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">TCP/IP,</font>
+            </font>
+          </strong>
+        </em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> який використовується для обміну даними в Інтернеті. Згодом ми дізнаємося більше про </font>
+        </font>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">HTTP-запит,</font>
+            </font>
+          </strong>
+        </em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> який є одним із фундаментальних елементів, що використовуються в тестуванні API. Отже, у цій статті ми розглянемо наступні моменти-</font>
+        </font>
+      </p>
+      <ul>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Що таке HTTP-запит?</font>
+            </font>
+          </em>
+          <ul>
+            <li>
+              <em>
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">Які існують різні методи запиту HTTP?</font>
+                </font>
+              </em>
+            </li>
+            <li>
+              <em>
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">І яка структура HTTP-запиту?</font>
+                </font>
+              </em>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Метод GET проти POST</font>
+            </font>
+          </em>
+        </li>
+      </ul>
+      <h2>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Що таке HTTP-запит?</font>
+        </font>
+      </h2>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Як уже було зрозуміло в моделі клієнтської архітектури, клієнт надсилає запит на сервер для отримання деякої інформації або даних. Крім того, запит клієнта є запитом HTTP, який обмінюється даними між клієнтом і сервером або, можна сказати, двома різними комп’ютерними системами. Крім того, це простий текстовий файл у форматі </font>
+        </font>
+        <em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">XML</font>
+          </font>
+        </em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> або </font>
+        </font>
+        <em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">JSON</font>
+          </font>
+        </em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> , який надсилає двійкові дані клієнта на сервер. Простий HTTP-запит GET виглядає так:</font>
+        </font>
+      </p>
+      <p>
+        <img src="https://www.toolsqa.com/gallery/Rest%20Assured/1.Sample%20HTTP%20Request.webp" alt="Зразок HTTP-запиту">
+      </p>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Крім того, URI запиту в цьому випадку -</font>
+        </font>
+      </p>
+      <p>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">https://bookstore.toolsqa.com/BookStore/v1/Books</font>
+            </font>
+          </strong>
+        </em>
+      </p>
+      <h3>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Які існують різні методи запиту HTTP?</font>
+            </font>
+          </strong>
+        </em>
+      </h3>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Методи запиту HTTP вказують дію, яку потрібно виконати через запит. Вони також відомі як дієслова та зазвичай використовуються для </font>
+        </font>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">операцій CRUD</font>
+            </font>
+          </strong>
+        </em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> , тобто створення, читання, оновлення та видалення. Крім того, методи HTTP-запиту чутливі до регістру і завжди мають бути великими. Згодом розглянемо деякі найпоширеніші методи HTTP:</font>
+        </font>
+      </p>
+      <p>
+        <strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">1. </font>
+          </font>
+        </strong>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">GET.</font>
+            </font>
+          </strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> Як випливає з назви, метод Get отримує інформацію з сервера. Крім того, це найпоширеніший метод, який не має тіла запиту. Щоразу, коли ви відкриваєте веб-сайт, запускається запит Get для отримання вмісту веб-сайту. Крім того, це еквівалентно операції читання. Деякі з основних особливостей методу GET:</font>
+          </font>
+        </em>
+      </p>
+      <ul>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Ми можемо легко додати дані в закладки за допомогою методу GET.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Обмеження довжини значень зазвичай становить 255 символів для методу GET.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">GET підтримує лише рядкові типи даних.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Запити GET можна кешувати.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Параметри, передані в методах GET, зберігаються в історії браузера.</font>
+            </font>
+          </em>
+        </li>
+      </ul>
+      <p>
+        <em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Приклад запиту GET виглядав би так:</font>
+          </font>
+        </em>
+      </p>
+      <p>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">ОТРИМАТИ https://bookstore.toolsqa.com/BookStore/v1/Books HTTP/1.1</font>
+            </font>
+          </strong>
+        </em>
+      </p>
+      <p>
+        <strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">2. </font>
+          </font>
+        </strong>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">HEAD:</font>
+            </font>
+          </strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> метод Head подібний до методу Get, але він отримує лише дані заголовка, а не все тіло відповіді. Крім того, ми використовуємо його, коли вам потрібно перевірити розмір файлу документа без завантаження документа.</font>
+          </font>
+        </em>
+      </p>
+      <p>
+        <strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">3. </font>
+          </font>
+        </strong>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">POST:</font>
+            </font>
+          </strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> метод Post працює для надсилання даних на сервер. Ви можете додавати або оновлювати дані за допомогою запиту на публікацію. Ми надсилаємо інформацію, яка потребує оновлення, у тілі запиту. У реальному світі дані форми на веб-сайті оновлюються за допомогою запиту Post. Деякі з найважливіших особливостей методу POST:</font>
+          </font>
+        </em>
+      </p>
+      <ul>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Дані, передані методом POST, не відображаються в URL-адресі браузера.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Крім того, значення, передані через POST, не зберігаються в історії браузера.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Крім того, немає обмежень щодо довжини даних, які надсилаються методом POST.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Крім того, запит методу POST підтримує різні типи даних, як-от рядкові, двійкові, цілі числа тощо.</font>
+            </font>
+          </em>
+        </li>
+      </ul>
+      <p>
+        <strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">4. </font>
+          </font>
+        </strong>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">PUT:</font>
+            </font>
+          </strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> метод Put схожий на метод Post, оскільки він оновлює дані. Єдина відмінність полягає в тому, що ми використовуємо його, коли нам потрібно повністю замінити існуючу сутність. Крім того, методи PUT є ідемпотентними, тобто вони повертають той самий результат при повторному виконанні.</font>
+          </font>
+        </em>
+      </p>
+      <p>
+        <strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">5. </font>
+          </font>
+        </strong>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">PATCH:</font>
+            </font>
+          </strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> цей метод знову схожий на методи Post і Put, але ми використовуємо його, коли нам потрібно частково оновити деякі дані. Крім того, на відміну від методів Post і Put, ви можете надіслати лише ту сутність, яка потребує оновлення в тілі запиту за допомогою методу Patch.</font>
+          </font>
+        </em>
+      </p>
+      <p>
+        <strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">6. </font>
+          </font>
+        </strong>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">DELETE:</font>
+            </font>
+          </strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> як і його назва, метод Delete видаляє представлення ресурсів сервера через певну URL-адресу. Крім того, як і метод Get, вони не мають тіла запиту.</font>
+          </font>
+        </em>
+      </p>
+      <p>
+        <strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">7. </font>
+          </font>
+        </strong>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">ВАРІАНТИ:</font>
+            </font>
+          </strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> Цей метод не є широко використовуваним у порівнянні з іншими. Він повертає дані, що визначають різні методи та операції, які підтримуються сервером за вказаною URL-адресою. Крім того, він відповідає заголовком Allow, що містить список методів HTTP, дозволених для ресурсу.</font>
+          </font>
+        </em>
+      </p>
+      <p>
+        <em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Тепер подивимося, як виглядає структура простого HTTP-запиту.</font>
+          </font>
+        </em>
+      </p>
+      <h3>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Яка структура HTTP-запиту?</font>
+            </font>
+          </strong>
+        </em>
+      </h3>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Наступний крок — зрозуміти, як виглядає HTTP-запит і як він структурований. HTTP-запит складається з:</font>
+        </font>
+      </p>
+      <ol>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Лінія запиту</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Нуль або більше заголовків</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Додаткове тіло запиту</font>
+            </font>
+          </em>
+        </li>
+      </ol>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Давайте тепер подивимося, що це за компоненти, але перед тим, як це зробити, розглянемо простий </font>
+        </font>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">REST API BookStore,</font>
+            </font>
+          </strong>
+        </em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> розроблений ToolsQA.</font>
+        </font>
+      </p>
+      <ul>
+        <li>
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">URL-адреса ресурсу:</font>
+              </font>
+            </strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> https://bookstore.toolsqa.com/</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Параметр:</font>
+              </font>
+            </strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> BookStore/v1/Books</font>
+            </font>
+          </em>
+        </li>
+      </ul>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Після об’єднання двох вищезазначених частин наша URL-адреса запиту стає:</font>
+        </font>
+      </p>
+      <p>
+        <a href="https://bookstore.toolsqa.com/BookStore/v1/Books">
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">https://bookstore.toolsqa.com/BookStore/v1/Books</font>
+              </font>
+            </strong>
+          </em>
+        </a>
+      </p>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Тепер вам потрібно відкрити вікно браузера та натиснути на цю URL-адресу. Згодом ви можете відкрити інструменти розробника браузера та перейти до вкладки «Мережа», як виділено на зображенні нижче, перш ніж натиснути URL-адресу.</font>
+        </font>
+      </p>
+      <p>
+        <img src="https://www.toolsqa.com/gallery/Rest%20Assured/2.Opening%20Network%20through%20developer%20tools.jpg" alt="Відкриття мережі через інструменти розробника">
+      </p>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Коли ви натиснете URL-адресу, ви побачите, що деякі запити надсилаються; вам потрібно клацнути на першому, виділеному нижче, і побачити, що детальний опис запиту відображається праворуч.</font>
+        </font>
+      </p>
+      <p>
+        <img src="https://www.toolsqa.com/gallery/Rest%20Assured/3.Request%20Description%20in%20console.webp" alt="Опис запиту в консолі">
+      </p>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Нарешті, тепер ми готові зрозуміти різні компоненти HTTP-запиту.</font>
+        </font>
+      </p>
+      <h4>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Лінія запиту</font>
+            </font>
+          </strong>
+        </em>
+      </h4>
+      <p></p>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Рядок запиту – це перший рядок HTTP-запиту. Поєднання трьох частин утворює це-</font>
+        </font>
+      </p>
+      <ol>
+        <li>
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Використаний метод HTTP</font>
+              </font>
+            </strong>
+          </em>
+        </li>
+        <li>
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">URI запиту</font>
+              </font>
+            </strong>
+          </em>
+        </li>
+        <li>
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Версія протоколу HTTP</font>
+              </font>
+            </strong>
+          </em>
+        </li>
+      </ol>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Озираючись на наш приклад, рядок запиту для нашого випадку виглядатиме так:</font>
+        </font>
+      </p>
+      <pre>
+		<code class="language-java">GET /BookStore/v1/Books HTTP/
+		    <span class="hljs-number">1.1</span>
+		</code>
+	   </pre>
+      <h5>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Метод HTTP</font>
+            </font>
+          </strong>
+        </em>
+      </h5>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Як обговорювалося вище, метод HTTP визначає дію, яка має виконуватися через запит. Крім того, найпоширенішими методами, які ви зустрінете, є GET або POST. Згодом ми побачимо різницю між ними далі в цій публікації.</font>
+        </font>
+      </p>
+      <h5>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">URI запиту</font>
+            </font>
+          </strong>
+        </em>
+      </h5>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">URI запиту, тобто уніфікований ідентифікатор ресурсу, допомагає визначити ресурси, до яких застосовується запит. URI запиту має загальний формат, як показано нижче.</font>
+        </font>
+      </p>
+      <pre>
+									<code class="language-java">Request-URI = 
+										<span class="hljs-string">"*"</span> | absoluteURI | abs_path | authority
+
+									</code>
+								</pre>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Давайте подивимося кілька прикладів того, як можна використовувати наведений вище URI запиту.</font>
+        </font>
+      </p>
+      <ol>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Коли ми використовуємо зірочку</font>
+            </font>
+          </em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> , </font>
+          </font>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">це означає, що запит надходить безпосередньо до сервера, а не до певного ресурсу. Крім того, ми повинні використовувати його, коли метод у запиті не стосується ресурсу. наприклад-</font>
+            </font>
+          </em>
+        </li>
+      </ol>
+      <p>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">ПАРАМЕТРИ * HTTP/1.1</font>
+            </font>
+          </strong>
+        </em>
+      </p>
+      <ol start="2">
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Крім того, форма abosulteURI є обов’язковою, коли ми робимо запит до проксі-сервера, який пересилає запит у дійсний кеш і повертає відповідь. Крім того, абсолютний шлях не може бути порожнім. Якщо нічого немає, це має бути вказано як " </font>
+            </font>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">/</font>
+              </font>
+            </strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> " (корінь сервера) в URI. приклад-</font>
+            </font>
+          </em>
+        </li>
+      </ol>
+      <p>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">GET https://www.toolsqa.com/ HTTP/1.1</font>
+            </font>
+          </strong>
+        </em>
+      </p>
+      <ol start="3">
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Крім того, найпоширенішою формою Request-URI є та, яку ми використовували в нашому прикладі. Клієнт отримує ресурс безпосередньо з вихідного сервера, створюючи TCP-з’єднання до порту 80 хосту « </font>
+            </font>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">bookstore.toolsqa.com</font>
+              </font>
+            </strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> », і рядки нижче надсилаються у запиті-</font>
+            </font>
+          </em>
+        </li>
+      </ol>
+      <p>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">GET /BookStore/v1/Books HTTP/1.1 </font>
+            </font>
+          </strong>
+        </em>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Хост: bookstore.toolsqa.com</font>
+            </font>
+          </strong>
+        </em>
+      </p>
+      <h5>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Версія протоколу HTTP</font>
+            </font>
+          </strong>
+        </em>
+      </h5>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Версія протоколу HTTP дозволяє відправнику вказати формат повідомлення, а також його здатність розуміти подальше спілкування. Крім того,&nbsp; </font>
+        </font>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">HTTP/1.1</font>
+            </font>
+          </strong>
+        </em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;"> є стандартизованою версією протоколу, яку ми зазвичай використовуємо.</font>
+        </font>
+      </p>
+      <h4>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Заголовок запиту</font>
+            </font>
+          </strong>
+        </em>
+      </h4>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Використовуючи заголовок запиту, клієнт може надсилати на сервер додаткову інформацію про запит, а також про самого клієнта. Крім того, у запиті може бути нуль або більше заголовків, які можуть визначати тип вмісту, специфікацію авторизації, інформацію про файли cookie тощо. Крім того, ми також можемо визначити спеціальні заголовки за допомогою x-синтаксису відповідно до вимог. Наведений нижче знімок показує різні заголовки для HTTP-запиту, який ми використовуємо як приклад. Крім того, рядок запиту також виділено.</font>
+        </font>
+      </p>
+      <p>
+        <img src="https://www.toolsqa.com/gallery/Rest%20Assured/4.HTTP%20Request%20Header%20and%20Request%20Line.webp" alt="Заголовок і рядок запиту HTTP">
+      </p>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">У наведеному вище запиті є деякі поля заголовків, які ви часто зустрічаєте під час тестування API. Отже, давайте швидко поглянемо на них -</font>
+        </font>
+      </p>
+      <ul>
+        <li>
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">User-Agent:</font>
+              </font>
+            </strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> дозволяє серверу ідентифікувати програму, операційну систему, постачальника та версію.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Connection:</font>
+              </font>
+            </strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> контролює підключення до мережі. Іншими словами, завершити або продовжити з'єднання після транзакції.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Cache-Control:</font>
+              </font>
+            </strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> визначає політику кешування браузера.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Accept-Language:</font>
+              </font>
+            </strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> вказує, які всі мови (природні) клієнт може зрозуміти.</font>
+            </font>
+          </em>
+        </li>
+      </ul>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Крім наведеного вище, деякі з поширених полів заголовка запиту, які використовуються відповідно до вимог:</font>
+        </font>
+      </p>
+      <ul>
+        <li>
+          <em>Accept-Charset</em>
+        </li>
+        <li>
+          <em>Accept-Encoding</em>
+        </li>
+        <li>
+          <em>Authorization</em>
+        </li>
+        <li>
+          <em>Content-Length</em>
+        </li>
+        <li>
+          <em>Content-Type</em>
+        </li>
+        <li>
+          <em>Cookie</em>
+        </li>
+        <li>
+          <em>Expect</em>
+        </li>
+        <li>
+          <em>From</em>
+        </li>
+        <li>
+          <em>Host</em>
+        </li>
+        <li>
+          <em>If-Match</em>
+        </li>
+        <li>
+          <em>If-Modified-Since</em>
+        </li>
+        <li>
+          <em>In-None-Match</em>
+        </li>
+        <li>
+          <em>If-Range</em>
+        </li>
+        <li>
+          <em>If-Unmodified-Since</em>
+        </li>
+        <li>
+          <em>Max-Forwards</em>
+        </li>
+        <li>
+          <em>Proxy-Authorization</em>
+        </li>
+        <li>
+          <em>Range</em>
+        </li>
+        <li>
+          <em>Referer</em>
+        </li>
+        <li>
+          <em>TE</em>
+        </li>
+      </ul>
+      <h4>
+        <em>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Тіло запиту</font>
+            </font>
+          </strong>
+        </em>
+      </h4>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Тіло запиту надсилає додаткову інформацію на сервер для правильного отримання даних із запиту. У нашому прикладі ми не надіслали жодного тіла запиту після заголовка запиту, як показано на знімку вище. Крім того, тіло запиту може бути у формі XML або JSON. Згодом, у наступних статтях, ми розглянемо ці запити більш детально.</font>
+        </font>
+      </p>
+      <h2>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Метод GET і POST</font>
+        </font>
+      </h2>
+      <p>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Різниця між методом GET і POST є найпоширенішим питанням на співбесідах. Розглянемо деякі основні моменти, які відрізняють обидва ці методи.</font>
+        </font>
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <em>
+                <strong>
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">ОТРИМАТИ</font>
+                  </font>
+                </strong>
+              </em>
+            </th>
+            <th>
+              <em>
+                <strong>
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">ПОСТ</font>
+                  </font>
+                </strong>
+              </em>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Дані проходять через заголовок</font>
+              </font>
+            </td>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Дані проходять через тіло запиту</font>
+              </font>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Розмір даних обмежений 255 символами</font>
+              </font>
+            </td>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Немає обмежень на розмір даних</font>
+              </font>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Оскільки дані проходять через URL-адресу, вони стають небезпечними</font>
+              </font>
+            </td>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Дані захищені, оскільки вони не розкриваються</font>
+              </font>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Запити GET очікують відповіді на попередній запит перед надсиланням наступного запиту</font>
+              </font>
+            </td>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Запит POST не чекає успішної відповіді від попереднього запиту, перш ніж натиснути на наступний.</font>
+              </font>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Можна кешувати</font>
+              </font>
+            </td>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Він не може кешувати.</font>
+              </font>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Можна робити закладки</font>
+              </font>
+            </td>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Неможливо створити закладку.</font>
+              </font>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Краща продуктивність порівняно з POST, оскільки значення додаються до URL-адреси за умовчанням</font>
+              </font>
+            </td>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Менш ефективний у порівнянні з GET, оскільки ми витрачаємо деякий час на включення значень тіла запиту в запит POST</font>
+              </font>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Дозволений лише рядковий тип даних</font>
+              </font>
+            </td>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Немає обмежень щодо типу даних</font>
+              </font>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Параметри зберігаються в історії браузера</font>
+              </font>
+            </td>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Параметри не зберігаються в історії браузера</font>
+              </font>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Натиснення кнопки перезавантаження не вплине на дані.</font>
+              </font>
+            </td>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Дані форми скидаються, якщо ми натискаємо кнопку перезавантаження.</font>
+              </font>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Використовує кодування application/x-www-form-urlencoded</font>
+              </font>
+            </td>
+            <td>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Використовує application/x-www-form-urlencoded або multipart/form-data для двійкових даних</font>
+              </font>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Ключові висновки</font>
+        </font>
+      </h2>
+      <ul>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Запити HTTP надсилають запити на сервер для отримання потрібної інформації.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Крім того, ми побачили різні методи запитів і яку корисність вони мають.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Крім того, ми побачили, як виглядає структура HTTP-запиту та що це за різні компоненти.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Крім того, для запиту GET або DELETE не потрібне тіло запиту.</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Згодом, у нашій наступній статті, ми обговоримо HTTP-відповіді.</font>
+            </font>
+          </em>
+        </li>
+      </ul>
+    </main>
+  </body>
+</html>

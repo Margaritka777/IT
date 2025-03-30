@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Gunjan Kaushik">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&amp;display=swap" media="all" onload="this.media='all'">
+    <link rel="stylesheet" href="./article.css">
+    <title>Що таке відповідь HTTP?</title>
+  </head>
+<body>
+    <main role="main" class="article-content">
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Кожна відповідь HTTP, отримана в результаті запиту HTTP, надісланого клієнтом на сервер, має код статусу. Це значення коду стану повідомляє нам, чи була відповідь HTTP успішною чи ні. Ця стаття є продовженням нашої попередньої статті, в якій ми виконали зразок тестового виклику REST API. У цій статті ми обговоримо, як перевірити стан відповіді HTTP за допомогою REST Assured. Зміст публікації відображає наступний індекс:</font>
+          </font>
+        </p>
+        <ul>
+          <li>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Перевірте статус відповіді HTTP за допомогою Rest Assured </font>
+            </font>
+            <ul>
+              <li>
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">Як перевірити код статусу відповіді HTTP</font>
+                </font>
+              </li>
+              <li>
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">Перевірка коду статусу помилки HTTP?</font>
+                </font>
+              </li>
+              <li>
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">Як перевірити рядок стану відповіді HTTP?</font>
+                </font>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <h2>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Перевірте статус відповіді HTTP за допомогою Rest Assured</font>
+          </font>
+        </h2>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Об’єкт відповіді HTTP зазвичай представляє пакет HTTP (пакет відповіді), надісланий сервером веб-служб у відповідь на запит клієнта. Відповідь HTTP містить:</font>
+          </font>
+        </p>
+        <ol>
+          <li>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Статус.</font>
+            </font>
+          </li>
+          <li>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Колекція заголовків.</font>
+            </font>
+          </li>
+          <li>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Тіло.</font>
+            </font>
+          </li>
+        </ol>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">У нас є детальна стаття про HTTP-відповідь </font>
+          </font>
+          <a href="https://www.toolsqa.com/client-server/http-response/">
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">тут.</font>
+              </font>
+            </strong>
+          </a>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Отже, коли ми кажемо, що нам потрібно перевірити статус відповіді HTTP, ми з нетерпінням чекаємо на наявність механізму для читання та перевірки всього об’єкта відповіді, включаючи статус, заголовки та тіло. Тому ми перевірятимемо кожен компонент відповіді HTTP окремо. Отже, у цій статті перевірка стану відповіді HTTP розглядатиметься у три частини:</font>
+          </font>
+        </p>
+        <ul>
+          <li>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Перевірка коду статусу відповіді HTTP.</font>
+            </font>
+          </li>
+          <li>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Як перевірити код статусу помилки</font>
+            </font>
+          </li>
+          <li>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Перевірка рядка стану відповіді.</font>
+            </font>
+          </li>
+        </ul>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Як ми вже знаємо, той самий REST API повертає повідомлення-відповідь у форматі XML або JSON. Цей формат залежить від атрибута </font>
+          </font>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Media-Type</font>
+            </font>
+          </strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> &nbsp;у запиті HTTP.</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Але як тоді клієнт знатиме, яку відповідь він отримає від API? Ну, це керується заголовками відповідей. Заголовок відповіді містить атрибут </font>
+          </font>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Content-Type</font>
+            </font>
+          </strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> , який повідомляє про тип формату тіла відповіді.</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Розглянемо приклад Swagger UI, який ми обговорювали в попередніх статтях. Припустімо, що ми надсилаємо запит GET до Книжкового магазину через наш браузер наступним чином:</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">java curl -X GET "https://demoqa.com/BookStore/v1/Books" -H "accept: application/json"</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Коли наведена вище команда виконується, ми отримуємо відповідь, показану на екрані нижче:</font>
+          </font>
+        </p>
+        <p>
+          <img src="./img/article3/1.png" alt="HTTP-відповідь">
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Як видно з наведеного вище знімка екрана, відповідь має статус, заголовки та тіло. Якщо ми перевіримо розділ </font>
+          </font>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">«Заголовки відповідей»</font>
+            </font>
+          </em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> , на екрані вище, він має атрибут типу вмісту, який має значення разом з іншими атрибутами. Перевіривши цей заголовок, клієнт знає, якого типу відповіді (тіло) ми можемо очікувати.</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Переходимо до перевірки статусної частини відповіді.</font>
+          </font>
+        </p>
+        <h3>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Як перевірити код статусу відповіді HTTP</font>
+            </font>
+          </strong>
+        </h3>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Коли клієнт запитує певну інформацію від сервера, сервер надсилає клієнту відповідь із кодом стану. Код статусу, який повертає сервер, повідомляє нам, чи був запит успішним чи ні. Якщо запит пройшов успішно, сервер надсилає код статусу в діапазоні 200-299. Якщо запит не був успішним, повертається код статусу, відмінний від діапазону. Ми можемо отримати список кодів стану HTTP разом із їхнім описом на </font>
+          </font>
+          <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">
+            <strong>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">сторінці W3.</font>
+              </font>
+            </strong>
+          </a>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Бібліотека Rest Assured надає пакет під назвою </font>
+          </font>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">"io.restassured.response"</font>
+            </font>
+          </em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> , який має інтерфейс відповіді. Інтерфейс відповіді надає методи, які можуть допомогти отримати частини отриманої відповіді. На наступному знімку екрана показано деякі важливі методи інтерфейсу </font>
+          </font>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">відповіді</font>
+            </font>
+          </strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> .</font>
+          </font>
+        </p>
+        <p>
+          <img src="./img/article3/2.png" alt="Відповідь-Інтерфейс-Методи">
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Метод * </font>
+          </font>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">getStatusCode()</font>
+            </font>
+          </em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> &nbsp; використовується для отримання коду статусу відповіді. Цей метод повертає ціле число, а потім ми можемо перевірити його значення. </font>
+          </font>
+          <a href="https://www.original.toolsqa.com/testng-asserts/">
+            <em>
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">TestNG Assert</font>
+              </font>
+            </em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> *</font>
+            </font>
+          </a>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> використовується для перевірки коду статусу. Тепер розглянемо наведений нижче код:</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">java import static org.junit.Assert.*; імпорт org.testng.Assert; //використовується для перевірки стану відповіді import org.testng.annotations.Test; import io.restassured.RestAssured; import io.restassured.response.Response; import io.restassured.specification.RequestSpecification;</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">public class RestAssuredTestResponse { @Test public void GetBookDetails() { </font>
+          </font>
+          <br>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> // Вкажіть базову URL-адресу веб-служби RESTful RestAssured.baseURI = "https://demoqa.com/BookStore/v1/Books"; // Отримання RequestSpecification запиту, який буде надіслано на сервер RequestSpecification httpRequest = RestAssured.given();</font>
+          </font>
+        </p>
+        <pre>
+                          <code>       Response response = httpRequest.get("");
+                              <font></font>
+                              <font></font>
+             // Get the status code of the request. 
+                              <font></font>
+             //If request is successful, status code will be 200
+                              <font></font>
+            int statusCode = response.getStatusCode();
+                              <font></font>
+                              <font></font>
+             // Assert that correct status code is returned.
+                              <font></font>
+            Assert.assertEquals(statusCode /*actual value*/, 200 /*expected value*/, 
+                              <font></font>
+              "Correct status code returned");
+                              <font></font>
+                              <font></font>
+      }
+                              <font></font>
+                          </code>
+                      </pre>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">}</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Наведений нижче рядок коду витягує код статусу з повідомлення:</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">java int statusCode = response.getStatusCode();</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Повернене значення </font>
+          </font>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">"statusCode"</font>
+            </font>
+          </em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> порівнюється з очікуваним значенням, тобто 200. Якщо обидва значення рівні, повертається відповідне повідомлення.</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">java // Підтвердити, що повернуто правильний код статусу. Assert.assertEquals(statusCode / </font>
+          </font>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">фактичне значення</font>
+            </font>
+          </em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> /, 200 / </font>
+          </font>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">очікуване значення</font>
+            </font>
+          </em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> /, "Повернено правильний код статусу");</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Якщо ви запустите наведений вище тест, ви побачите, що тест пройдено, оскільки веб-служба повертає код статусу 200, як показано на зображенні нижче.</font>
+          </font>
+        </p>
+        <p>
+          <img src="./img/article3/3.png" alt="Response-Status-TestNG-вихід">
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Таким чином ми можемо перевірити код статусу відповіді за допомогою методу </font>
+          </font>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">"getStatusCode()"</font>
+            </font>
+          </em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> інтерфейсу відповіді. Зауважте, що оскільки ми вже знали, що код успіху тут дорівнює 200, ми написали відповідний код. Ваш сервер може відповісти на успіх кодом від 200 до 299. Найкраще перевірити це заздалегідь. Тепер перейдемо до обговорення того, як перевірити код статусу, який повертає значення, відмінні від 200, тобто код статусу помилки.</font>
+          </font>
+        </p>
+        <h3>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Як перевірити код статусу помилки HTTP?</font>
+            </font>
+          </strong>
+        </h3>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Наразі ситуація між запитом і відповіддю влаштовує, і ми отримали лише 200 кодів статусу, які вказують на успішні запити. Але це не завжди може бути правдою в реальному світі. Можуть бути такі причини, як сервер не працює, REST API не працює належним чином або самі запити можуть бути проблематичними. Підсумовуючи, ми можемо зіткнутися з такими сценаріями:</font>
+          </font>
+        </p>
+        <ol>
+          <li>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Сервер, на якому розміщено REST API, не працює.</font>
+            </font>
+          </li>
+          <li>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Некоректний запит клієнта.</font>
+            </font>
+          </li>
+          <li>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Запитаний клієнтом ресурс не існує.</font>
+            </font>
+          </li>
+          <li>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Під час обробки запиту на стороні сервера виникає помилка.</font>
+            </font>
+          </li>
+        </ol>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Отже, коли виникає будь-який із наведених вище сценаріїв, REST API поверне відповідний код статусу, відмінний від 200. Клієнт, у свою чергу, має перевірити цей код статусу та обробити його відповідно.</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Для сервісу ToolsQA Book Store давайте створимо ще один тест із помилковим сценарієм. Тут ми перевіримо код статусу HTTP, який повертає веб-служба книжкового магазину, коли введено недійсний параметр.</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Отже, тут ми надаємо параметр для отримання інформації про користувача. Тут ми надаємо неіснуючий userId як параметр. Код виглядає так:</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">java import static org.junit.Assert.*; імпорт org.testng.Assert; //використовується для перевірки стану відповіді import org.testng.annotations.Test; import io.restassured.RestAssured; import io.restassured.response.Response; import io.restassured.specification.RequestSpecification;</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">публічний клас RestAssuredTestResponse {</font>
+          </font>
+        </p>
+        <pre>
+                              <code>@Test
+                                  <font></font>
+      public void GetPetDetails()
+                                  <font></font>
+      {  
+                                  <font></font>
+         // Specify the base URL to the RESTful web service
+                                  <font></font>
+             RestAssured.baseURI = "https://demoqa.com/Account/v1/User/";
+                                  <font></font>
+             // Get the RequestSpecification of the request to be sent to the server
+                                  <font></font>
+             RequestSpecification httpRequest = RestAssured.given();
+                                  <font></font>
+                                  <font></font>
+             Response response = httpRequest.get("test");
+                                  <font></font>
+                                  <font></font>
+             // Get the status code of the request. 
+                                  <font></font>
+             //If request is successful, status code will be 200
+                                  <font></font>
+             int statusCode = response.getStatusCode();
+                                  <font></font>
+                                  <font></font>
+             // Assert that correct status code is returned.
+                                  <font></font>
+             Assert.assertEquals(statusCode /*actual value*/, 200 /*expected value*/, 
+                                  <font></font>
+             "Correct status code returned");
+                                  <font></font>
+      }
+                                  <font></font>
+                              </code>
+                          </pre>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">}</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Коли ми запускаємо цей тест, він повертає код помилки 401. Нижче ми можемо побачити результат виконання тесту.</font>
+          </font>
+        </p>
+        <p>
+          <img src="./img/article3/4.png" alt="Вихід статусу помилки">
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Примітка: ми можемо швидко змінити код вище, щоб переконатися, що тест пройдено. Ця зміна показана нижче:</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">java Assert.assertEquals(statusCode / </font>
+          </font>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">фактичне значення</font>
+            </font>
+          </em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> /, 401 / </font>
+          </font>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">очікуване значення</font>
+            </font>
+          </em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> /, "Повернено правильний код статусу");</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Отже, тут ми очікуємо, що повернене значення буде 401 замість 200, отже, тест пройдено. Далі ми перевіримо </font>
+          </font>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">«рядок стану»</font>
+            </font>
+          </em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> .</font>
+          </font>
+        </p>
+        <h3>
+          <strong>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Як перевірити рядок статусу відповіді?</font>
+            </font>
+          </strong>
+        </h3>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">« Рядок </font>
+          </font>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">стану»</font>
+            </font>
+          </em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> — це перший рядок, який повертається у відповіді HTTP. Рядок стану складається з трьох підрядків:</font>
+          </font>
+        </p>
+        <ul>
+          <li>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Версія протоколу HTTP.</font>
+            </font>
+          </li>
+          <li>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Код статусу.</font>
+            </font>
+          </li>
+          <li>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Рядкове значення коду стану.</font>
+            </font>
+          </li>
+        </ul>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Наприклад, якщо запит виконано успішно, рядок стану матиме значення </font>
+          </font>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">«HTTP/1.1 200 OK».</font>
+            </font>
+          </em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> Тут перша частина — це протокол HTTP </font>
+          </font>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">(HTTP/1.1).</font>
+            </font>
+          </em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> &nbsp;Далі йде код стану HTTP </font>
+          </font>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">(200).</font>
+            </font>
+          </em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> Третє — повідомлення про статус&nbsp; </font>
+          </font>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">(OK).</font>
+            </font>
+          </em>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Ми можемо прочитати весь рядок стану за допомогою методу getStatusLine () інтерфейсу відповіді. Наступний код показує демонстрацію.</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">java @Test public void GetBookDetails() { </font>
+          </font>
+          <br>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> // Вкажіть базову URL-адресу веб-служби RESTful RestAssured.baseURI = "https://demoqa.com/BookStore/v1/Books"; // Отримання RequestSpecification запиту, який буде надіслано на сервер RequestSpecification httpRequest = RestAssured.given(); Відповідь response = httpRequest.get("");</font>
+          </font>
+        </p>
+        <pre>
+                                      <code>// Get the status line from the Response in a variable called statusLine
+                                          <font></font>
+      String statusLine = response.getStatusLine();
+                                          <font></font>
+      Assert.assertEquals(statusLine /*actual value*/, "HTTP/1.1 200 OK" 
+                                          <font></font>
+        /*expected value*/, "Correct status code returned");
+                                          <font></font>
+                                      </code>
+                                  </pre>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">}</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Тут ми виконуємо подібний тест, як і для коду стану. Ми читаємо рядок стану за допомогою методу getStatusLine () у рядкове значення. Потім ми порівнюємо це повернуте значення з </font>
+          </font>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">«HTTP/1.1 200 OK»,</font>
+            </font>
+          </em>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;"> щоб перевірити, чи статус успішний.</font>
+          </font>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Примітка. Статтю про листоношу на ту саму тему (Відповідь у Postman) можна знайти на сторінці &nbsp; </font>
+          </font>
+          <a href="https://www.toolsqa.com/postman/response-in-postman/">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Response у Postman.</font>
+            </font>
+          </a>
+        </p>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Відеоінструкція з перевірки коду стану доступна на сторінці </font>
+          </font>
+          <a href="https://www.youtube.com/watch?v=uD4sKHzWf8Q">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Verify Status Code у Rest Assured.</font>
+            </font>
+          </a>
+        </p>
+        <h2>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Ключові висновки</font>
+          </font>
+        </h2>
+        <p>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">У цій статті ми обговорили перевірку статусу HTTP у відповіді REST.</font>
+          </font>
+        </p>
+        <ol>
+          <li>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Відповідь, отримана від сервера, складається зі стану, заголовка та тіла.</font>
+            </font>
+          </li>
+          <li>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Статус відповіді, у свою чергу, містить код стану та рядок стану.</font>
+            </font>
+          </li>
+          <li>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Бібліотека Rest Assured надає інтерфейс «Відповідь», який надає численні методи отримання полів відповіді.</font>
+            </font>
+          </li>
+          <li>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Ми можемо прочитати код стану за допомогою методу getStatusCode(). Так само ми можемо прочитати рядок стану за допомогою методу getStatusLine () інтерфейсу відповіді.</font>
+            </font>
+          </li>
+          <li>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Після прочитання статусу ми можемо перевірити, чи код успішний (200) чи будь-який інший код.</font>
+            </font>
+          </li>
+        </ol>
+      </main>
+</body>
+</html>
