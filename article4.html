@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Gunjan Kaushik">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&amp;display=swap" media="all" onload="this.media='all'">
+    <link rel="stylesheet" href="./article.css">
+    <title>Що таке HTTP запит?</title>
+  </head>
+  <body>
+    <main role="main" class="article-content">
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Всесвітня павутина сьогодні стала надто складною. З сотнями й тисячами електронних засобів масової інформації, які спілкуються між собою, процес спілкування став надто складним і напевно важким для обчислень. Такі сценарії вимагають чогось, що може полегшити спілкування та звести до мінімуму складність кодування. Це щось є предметом цієї публікації та називається REST.</font>
+    </font>
+  </p>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">REST, або </font>
+    </font>
+    <strong>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">RE</font>
+      </font>
+    </strong>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> presentational </font>
+    </font>
+    <strong>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">S</font>
+      </font>
+    </strong>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> State </font>
+    </font>
+    <strong>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">T</font>
+      </font>
+    </strong>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> Transfer, є архітектурним стилем і забезпечує стандарти між системами в Інтернеті. Зазвичай системи RESTful використовують стиль REST для спілкування одна з одною. Тож у багатьох місцях ви можете побачити </font>
+      <font style="vertical-align: inherit;">в Інтернеті </font>
+    </font>
+    <em>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">«RESTful»</font>
+        </font>
+      </strong>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> , і це означає те саме. У цій статті ми детальніше зупинимося на основах REST і розглянемо наступні теми в цій статті.</font>
+    </font>
+  </p>
+  <ul>
+    <li>
+      <em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Що таке REST – репрезентативна передача стану?</font>
+        </font>
+      </em>
+    </li>
+    <li>
+      <em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Що таке клієнти та ресурси?</font>
+        </font>
+      </em>
+    </li>
+    <li>
+      <em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Керівні принципи або обмеження REST</font>
+        </font>
+      </em>
+      <ul>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Уніфікований інтерфейс</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Розділення клієнт-сервер</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Без громадянства</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Пошарова система</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Кешується</font>
+            </font>
+          </em>
+        </li>
+        <li>
+          <em>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Код на вимогу</font>
+            </font>
+          </em>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <h2>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Що таке REST – репрезентативна передача стану?</font>
+    </font>
+  </h2>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">REST ( </font>
+    </font>
+    <em>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">RE</font>
+        </font>
+      </strong>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;"> presentational&nbsp; </font>
+      </font>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">S</font>
+        </font>
+      </strong>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;"> tete&nbsp; </font>
+      </font>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Transfer</font>
+        </font>
+      </strong>
+      <font style="vertical-align: inherit;"></font>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> ) вперше був представлений у 2000 році </font>
+      <em>
+        <font style="vertical-align: inherit;">Роєм </font>
+      </em>
+    </font>
+    <a href="https://en.wikipedia.org/wiki/Roy_Fielding">
+      <em>
+        <strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Філдінгом</font>
+          </font>
+        </strong>
+      </em>
+    </a>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> як архітектурний стиль для </font>
+    </font>
+    <em>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">розподілених гіпермедійних систем.</font>
+        </font>
+      </strong>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> REST-сумісні або RESTful системи є </font>
+    </font>
+    <em>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">«без стану»</font>
+        </font>
+      </strong>
+    </em>
+    <em>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;"> (розглянуто далі в цій статті)</font>
+      </font>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> і розділяють клієнта та сервер. Веб-програма, розроблена за допомогою REST </font>
+    </font>
+    <em>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">(веб-програма RESTful),</font>
+      </font>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> надає дані або інформацію про свої ресурси, які можуть бути будь-якими, що забажає розробник. Це дозволяє клієнту, який використовує цю програму, виконувати дії з ресурсами. Наприклад, використовуючи інформацію, надану користувачам, клієнти можуть створити нового користувача.</font>
+    </font>
+  </p>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Як інший приклад, припустімо, що у нас є зоомагазин, і інформація про всіх домашніх тварин у магазині зберігається на сервері. Якщо нам потрібна інформація, пов’язана з домашньою твариною </font>
+    </font>
+    <em>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">(скажімо, домашня тварина з ідентифікатором = 0),</font>
+      </font>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> тоді ми отримаємо доступ до відповідної URL-адреси зоомагазину в браузері </font>
+    </font>
+    <em>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">(тут браузер буде клієнтом).</font>
+      </font>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> Прикладом URL-адреси може бути </font>
+    </font>
+    <a href="https://demoqa.com/swagger/#/BookStore/BookStoreV1BooksGet">
+      <em>
+        <strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">"https://demoqa.com/BookStore/v1/Books".</font>
+          </font>
+        </strong>
+      </em>
+    </a>
+  </p>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Наведений вище інтерфейс виглядає так:</font>
+    </font>
+  </p>
+  <p>
+    <img src="/gallery/Rest%20Assured/1.ToolsQA%20official%20APIs%20for%20Testing.png" alt="Офіційні API ToolsQA для тестування">
+  </p>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Усі методи </font>
+    </font>
+    <em>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">(кольорові кнопки),</font>
+      </font>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> показані на знімку вище, відповідають REST API, які виконуються одним натисканням кнопки. Будь ласка, зверніть увагу, що це демонстраційний веб-сайт, і тому API дуже чіткі на екрані. Загалом, усе це робиться у бек-енді, і клієнту ця інформація не відображається. Повертаючись назад, коли ми натискаємо </font>
+      <font style="vertical-align: inherit;">кнопку </font>
+    </font>
+    <em>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">«ОТРИМАТИ»</font>
+        </font>
+      </strong>
+    </em>
+    <font style="vertical-align: inherit;"></font>
+    <em>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;"> (/Книги),</font>
+      </font>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> ми отримуємо відповідь у форматі JSON, який покаже нам деталі конкретної книги. Ця відповідь показана нижче:</font>
+    </font>
+  </p>
+  <p>
+    <img src="/gallery/Rest%20Assured/2.What%20is%20REST%20-%20Representational%20State%20Transfer.png" alt="Що таке REST - репрезентативна передача стану">
+  </p>
+  <p>
+    <em>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">Примітка. Коли ми натискаємо кнопку </font>
+      </font>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">«ОТРИМАТИ»</font>
+        </font>
+      </strong>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;"> , у браузері ми бачимо, що посилання змінюється на </font>
+      </font>
+      <a href="https://demoqa.com/swagger/#/BookStore/BookStoreV1BooksGet">
+        <strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">«https://demoqa.com/BookStore/v1/Books».</font>
+          </font>
+        </strong>
+      </a>
+    </em>
+  </p>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Ми обговоримо всі описані вище методи </font>
+    </font>
+    <em>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">(у вигляді кнопок)</font>
+      </font>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> у наступних статтях.</font>
+    </font>
+  </p>
+  <h3>
+    <em>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Представлення потоку REST</font>
+        </font>
+      </strong>
+    </em>
+  </h3>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Тепер давайте зобразимо фактичну передачу даних REST у наведеному вище прикладі на діаграмі нижче.</font>
+    </font>
+  </p>
+  <p>
+    <img src="/gallery/Rest%20Assured/3.Get-Post2863.png" alt="Get-Post2863">
+  </p>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Як показано на діаграмі вище, API працює як засіб зв’язку між базою даних </font>
+    </font>
+    <em>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">(тобто частиною сервера)</font>
+      </font>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> та клієнтом. Коли клієнт надсилає дані через API, він переходить до бази даних, виконує відповідну операцію </font>
+    </font>
+    <em>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">(наприклад, додає, видаляє, змінює тощо)</font>
+      </font>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> і повертає дані відповіді, які містять код відповіді, файли заголовків, інформацію про файли cookie тощо.</font>
+    </font>
+  </p>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Ми можемо узагальнити характеристики REST і роботу на наведеній вище діаграмі таким чином:</font>
+    </font>
+  </p>
+  <ul>
+    <li>
+      <em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Дані доступу клієнта з сервера передані REST. Це може бути або через авторизований доступ, або без дотримання будь-яких суворих вказівок.</font>
+        </font>
+      </em>
+    </li>
+    <li>
+      <em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Як ми бачимо, додаток, розроблений за допомогою REST, є інтерактивним додатком і в основному використовує веб-сервіси. У цьому випадку веб-служба відповідає вказівкам RESTful і виконує обмеження REST, які обговорюються далі в цій статті.</font>
+        </font>
+      </em>
+    </li>
+    <li>
+      <em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Веб-служба, що використовує REST, надає веб-ресурси в текстовому форматі та дозволяє їх читати та редагувати за допомогою попередньо визначеного набору операцій.</font>
+        </font>
+      </em>
+    </li>
+  </ul>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">REST — це спосіб доступу до веб-сервісу, який часто розглядається як альтернатива </font>
+    </font>
+    <a href="https://www.toolsqa.com/soapui/what-is-soapui/">
+      <em>
+        <strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">SOAP</font>
+          </font>
+        </strong>
+      </em>
+    </a>
+    <em>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;"> (простий протокол доступу до об’єктів).</font>
+      </font>
+    </em>
+  </p>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">У додатку RESTFul у нас є сутності, а саме клієнт і ресурс, які використовуються зазвичай. Коротко обговоримо їх далі.</font>
+    </font>
+  </p>
+  <h2>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Що таке клієнти та ресурси?</font>
+    </font>
+  </h2>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Клієнтом може бути програмне забезпечення, особа або система, яка використовує API для доступу до даних з іншого сервера додатків. Наприклад, розробник може отримати доступ до API Facebook, щоб вставити живу публікацію на власний веб-сайт. Програма розробника викличе Facebook API через браузер. Тож у цьому випадку браузер діє як клієнт, який викликає API Facebook.</font>
+    </font>
+  </p>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Якщо ми візуалізуємо цю систему за допомогою діаграми REST вище, клієнт або браузер підключиться до Facebook-сервера через REST API, а потім отримає інформацію, необхідну для відтворення на екрані.</font>
+    </font>
+  </p>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Як інший приклад, припустімо, що у мене є програма </font>
+    </font>
+    <em>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">"myHealthApp".</font>
+        </font>
+      </strong>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> Мені потрібні дані про пандемію Covid-19 з міста, наприклад Пуни. Щоб досягти цього, я розроблю API або методи, як-от </font>
+    </font>
+    <em>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">«Corona API»,</font>
+        </font>
+      </strong>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> за допомогою яких я можу запитувати дані від муніципальної ради Пуни ( </font>
+    </font>
+    <em>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">PMC</font>
+      </font>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> ). Це робиться за допомогою myHealthApp. Це означає, що використовуючи myHealthApp, який діє як клієнт, я буду робити запит на дані за допомогою Corona API </font>
+    </font>
+    <em>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">(скажімо, метод getCoronaData, щоб бути більш конкретним)</font>
+      </font>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> через браузер </font>
+    </font>
+    <em>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">(наприклад, </font>
+      </font>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">https://myHealthApp/getCoronaData</font>
+        </font>
+      </strong>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;"> ).</font>
+      </font>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> Цей метод getCoronaData у свою чергу підключатиметься до серверів PMC і отримуватиме необхідні дані у вигляді відповіді JSON </font>
+    </font>
+    <em>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">(або будь-якого іншого формату).</font>
+      </font>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> На стороні клієнта я можу взяти ці дані та виконувати з ними різні операції. Це використання API.</font>
+    </font>
+  </p>
+  <h3>
+    <em>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Що таке ресурс у REST?</font>
+        </font>
+      </strong>
+    </em>
+  </h3>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Будь-який менший блок, який можна трансформувати та адресувати через URL-адресу та метод HTTP, вважається ресурсом. Цей ресурс вносить зміни в базу даних. Для однієї програми у вас може бути багато ресурсів, усім із яких призначено певне завдання. Наприклад, книжковий інтернет-магазин може мати ресурс у вигляді таблиці бази даних. Ресурс в архітектурі REST — це все, до чого клієнт має доступ і може змінювати чи оновлювати.</font>
+    </font>
+  </p>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">У певному сенсі можна сказати, що ресурс – це будь-який об’єкт, для якого нам потрібна інформація з API. Отже, у наведеному вище прикладі про Facebook ресурс може бути публікацією, сторінкою або обліковим записом користувача. У прикладі Corona API ресурси — це всі деталі щодо Corona, як-от дані Corona, сторінки про лікування, вакцинацію тощо.</font>
+    </font>
+  </p>
+  <h2>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Керівні принципи або обмеження REST</font>
+    </font>
+  </h2>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Щоб API відповідав REST, він має виконувати або дотримуватися наведених нижче керівних принципів або обмежень, визначених REST.</font>
+    </font>
+  </p>
+  <h3>
+    <em>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Уніфікований інтерфейс</font>
+        </font>
+      </strong>
+    </em>
+  </h3>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Принцип уніфікованого інтерфейсу включає наступні частини, яким має відповідати API:</font>
+    </font>
+  </p>
+  <ol>
+    <li>
+      <em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Запит до сервера повинен мати ідентифікатор ресурсу.</font>
+        </font>
+      </em>
+    </li>
+    <li>
+      <em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Сервер повертає відповідь і містить таку інформацію, що клієнт може змінити або відредагувати ресурс.</font>
+        </font>
+      </em>
+    </li>
+    <li>
+      <em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Запит, надісланий через API, містить інформацію, необхідну серверу для виконання запиту. Кожна відповідь, яку повертає сервер, також містить усю інформацію, щоб клієнт зрозумів відповідь.</font>
+        </font>
+      </em>
+    </li>
+    <li>
+      <em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Гіпермедіа як двигун стану додатків. Програма означає веб-програму, яка працює на сервері. Гіпермедіа — це гіперпосилання або прості посилання, включені у відповідь. Таким чином, сервер в основному інформує клієнта про способи зміни веб-програми.</font>
+        </font>
+      </em>
+    </li>
+  </ol>
+  <h3>
+    <em>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Розділення клієнт-сервер</font>
+        </font>
+      </strong>
+    </em>
+  </h3>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Взаємодія між клієнтом і сервером є незалежною і здійснюється лише у формі запитів. Клієнт ініціює запит, а сервер надсилає відповіді. Відповідь є реакцією на запит. Тому все, що робить сервер, це чекає отримання запитів від клієнта. Він ніколи не надсилає інформацію про ресурси клієнту самостійно. Щоб отримати докладніші відомості про клієнт-сервер, зверніться до нашого підручника « </font>
+    </font>
+    <a href="https://toolsqa.com/client-server/client-server-architecture-and-model">
+      <em>
+        <strong>
+          <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">Клієнт-серверна архітектура».</font>
+          </font>
+        </strong>
+      </em>
+    </a>
+  </p>
+  <h3>
+    <em>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Без громадянства</font>
+        </font>
+      </strong>
+    </em>
+  </h3>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Слово </font>
+    </font>
+    <em>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">«без стану»</font>
+        </font>
+      </strong>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> означає, що сервер не відстежує користувачів, які використовують API. Отже, коли надходить новий запит, сервер не знатиме, чи той самий користувач уже надсилав запит GET для того самого ресурсу. Він не запам'ятовує ресурси, запитувані користувачем раніше. Наприклад, HTTP є протоколом без стану. Сервер HTTP не відстежує будь-який стан інформації, що передається туди-сюди. Таким чином, у будь-який момент часу клієнт може надіслати дійсну команду, а сервер не зв’язуватиме та не відстежуватиме попередні подібні команди.</font>
+    </font>
+  </p>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Отже, кожен запит, незалежно від інших запитів, зроблених користувачем, міститиме всі дані, необхідні серверу для виконання запиту та надсилання відповіді.</font>
+    </font>
+  </p>
+  <h3>
+    <em>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Пошарова система</font>
+        </font>
+      </strong>
+    </em>
+  </h3>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Багатошарова система забезпечує ієрархічну структуру між клієнтом і сервером. Між клієнтом і сервером може бути багато посередників, які працюють разом із REST API без повідомлення клієнта. Наші клієнти вважають, що є пряме підключення до сервера. Потім ми використовуємо це, щоб покращити нашу архітектуру та знизити складність розподіленої системи. Ці проміжні елементи забезпечують рівень безпеки, рівень балансування навантаження та інші функціональні можливості системи. Єдина вказівка ​​полягає в тому, що наявність цих проміжних рівнів не повинна впливати на запит або відповідь.</font>
+    </font>
+  </p>
+  <p>
+    <em>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">Примітка: абстракція шарів не дозволяє одному шару знати про наявність іншого шару.</font>
+      </font>
+    </em>
+  </p>
+  <h3>
+    <em>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Кешується</font>
+        </font>
+      </strong>
+    </em>
+  </h3>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Дані сервера, отримані у відповіді, містять інформацію про те, кешуються дані чи ні. Якщо дані можна кешувати, вони міститимуть певний номер версії, який уможливлює кешування. Клієнт знатиме, яку версію даних він отримав із попередньої відповіді. Таким чином клієнт може уникнути повторного запиту даних. Дані, які можна кешувати </font>
+    </font>
+    <em>
+      <font style="vertical-align: inherit;">
+        <font style="vertical-align: inherit;">(і, отже, номер версії)</font>
+      </font>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> також допомагають клієнту дізнатися про закінчення терміну дії даних версії та необхідність нового запиту для отримання останніх даних.</font>
+    </font>
+  </p>
+  <h3>
+    <em>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Код на вимогу</font>
+        </font>
+      </strong>
+    </em>
+  </h3>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Це конкретне обмеження </font>
+    </font>
+    <em>
+      <strong>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">«Код на вимогу»</font>
+        </font>
+      </strong>
+    </em>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;"> є необов’язковим, і без його виконання ми можемо мати RESTful API.</font>
+    </font>
+  </p>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Клієнт може надіслати серверу запит на код, а потім сервер відповість деяким кодом у формі сценарію або іншої сутності. Наприклад, сервери можуть розширювати функціональність клієнта, завантажуючи та виконуючи попередньо скомпільований код, як-от аплет, або сценарій на стороні клієнта, як-от JavaScript. Отже, коли ми натискаємо будь-яке відео на Facebook, Facebook запускає попередньо скомпільоване або будь-яке стороннє програмне забезпечення для запуску цього відео.</font>
+    </font>
+  </p>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Якщо API відповідає вищезазначеним обмеженням, ми можемо сказати, що це RESTful API.</font>
+    </font>
+  </p>
+  <h2>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">Ключові висновки</font>
+    </font>
+  </h2>
+  <p>
+    <font style="vertical-align: inherit;">
+      <font style="vertical-align: inherit;">У цій статті ми обговорили запровадження протоколу REST для веб-служб.</font>
+    </font>
+  </p>
+  <ol>
+    <li>
+      <em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">REST (REpresentational State Transfer) — це стандарт, який працює між машинами, які переважно виконують веб-сервіси.</font>
+        </font>
+      </em>
+    </li>
+    <li>
+      <em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Сервер отримує запит у формі REST API. Потім сервер запускає веб-додаток і надсилає відповідь клієнту.</font>
+        </font>
+      </em>
+    </li>
+    <li>
+      <em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">Щоб API був дійсним REST API (RESTful API), він має відповідати деяким обмеженням, які ми обговорювали вище.</font>
+        </font>
+      </em>
+    </li>
+    <li>
+      <em>
+        <font style="vertical-align: inherit;">
+          <font style="vertical-align: inherit;">RESTful API дотримується цих обмежень (їх також називають керівними принципами).</font>
+        </font>
+      </em>
+    </li>
+  </ol>
+  <p></p>
+</main>
+</body>
