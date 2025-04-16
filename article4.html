@@ -1,17 +1,28 @@
-<div id="google_translate_element"></div>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Перекладач сайту</title>
+</head>
+<body>
 
-<script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'en',
-      includedLanguages: 'uk', // Ukrainian
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-  }
-</script>
+  <h2>Перекласти сайт українською</h2>
+  <input type="text" id="siteUrl" placeholder="Введіть URL сайту" size="50" />
+  <button onclick="translateSite()">Перекласти</button>
 
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
+    function translateSite() {
+      const input = document.getElementById('siteUrl').value;
+      if (input.trim() === '') {
+        alert('Будь ласка, введіть адресу сайту');
+        return;
+      }
 
-<iframe src="https://www.toolsqa.com/rest-assured/what-is-rest/" width="100%" height="500">
-  <p>Your browser does not support iframes.</p>
-</iframe>
+      const encodedUrl = encodeURIComponent(input);
+      const translateUrl = `https://translate.google.com/translate?hl=uk&sl=en&u=${encodedUrl}`;
+      window.open(translateUrl, '_blank');
+    }
+  </script>
+
+</body>
+</html>
